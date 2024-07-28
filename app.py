@@ -23,22 +23,13 @@ def predict():
         symptoms = data['symptom']
         print(f"Received symptoms: {symptoms}")
         symptoms_tfidf = vectorizer.transform([symptoms])
-        prediction = model.predict(symptoms_tfidf)[0]
-        
-        disease = map_prediction_to_disease(prediction)
-        print("HELLOOOO")
-        
-        return jsonify({'disease': disease})
+        prediction = model.predict(symptoms_tfidf)[0] 
+        print(prediction)
+        return jsonify({'disease': prediction})
     
     except Exception as e:
         print(f"Error occurred: {e}")
         return jsonify({'error': 'An error occurred during prediction'}), 500
-
-def map_prediction_to_disease(prediction):
-    print(prediction)
-
-    
-    return prediction
 
 if __name__ == '__main__':
     app.run(debug=True)
